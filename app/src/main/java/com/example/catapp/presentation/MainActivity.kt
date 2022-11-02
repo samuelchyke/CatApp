@@ -1,4 +1,4 @@
-package com.example.catapp
+package com.example.catapp.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

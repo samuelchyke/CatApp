@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.catapp"
@@ -88,7 +88,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Coroutine
-    def coroutine_version = "2.3.2"
+    def coroutine_version = "1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
 
@@ -126,8 +126,8 @@ dependencies {
 
     //Image Loading
     def landscape_version = "2.0.0"
-    implementation "com.github.skydoves:landscapist-glide:$landscape_version  "
+    implementation "com.github.skydoves:landscapist-glide:$landscape_version"
     implementation "com.github.skydoves:landscapist-placeholder:$landscape_version"
 
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+    kapt 'com.github.bumptech.glide:compiler:4.13.0'
 }
