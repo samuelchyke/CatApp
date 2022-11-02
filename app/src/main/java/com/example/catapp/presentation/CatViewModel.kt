@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.catapp.model.CatItem
-import com.example.catapp.model.CatResponse
 import com.example.catapp.repository.NetworkRepository
 import com.example.catapp.util.CatCategory
 import com.example.catapp.util.getCatCategory
@@ -20,7 +19,7 @@ class CatViewModel @Inject constructor(
 
     val cat: MutableState<List<CatItem>> = mutableStateOf(listOf())
 
-    val limit = mutableStateOf(10)
+    val page = mutableStateOf(1)
 
     val category = mutableStateOf(2)
 
@@ -30,21 +29,53 @@ class CatViewModel @Inject constructor(
 
     val loading = mutableStateOf(true)
 
+    private var catListScrollPosition = 0
+
+
     init {
         searchCats()
     }
 
     fun searchCats() = viewModelScope.launch {
         loading.value = true
-        val response = networkRepository.getListOfCats(limit.value, category.value)
+        clearCatList()
+        val response = networkRepository.getListOfCats(page.value, category.value)
         response.body()?.let {
             cat.value = it
         }
         loading.value = false
     }
 
+    fun nextPage(){
+        viewModelScope.launch {
+            // prevent duplicate event due to recompose happening to quickly
+            if((catListScrollPosition + 1) >= (page.value * 10)){
+                loading.value = true
+                incrementPage()
+
+                if(page.value > 1){
+                    val response = networkRepository.getListOfCats(page.value, category.value)
+                    response.body()?.let {
+                        appendCats(it)
+                    }
+                }
+                loading.value = false
+            }
+        }
+    }
+
+    private fun appendCats(cats: List<CatItem>){
+        val currentList = ArrayList(this.cat.value)
+        currentList.addAll(cats)
+        this.cat.value = currentList
+    }
+
+    private fun incrementPage(){
+        page.value ++
+    }
+
     fun onSelectedCategoryChanged(category: Int) {
-        this.limit.value = 10
+        this.page.value = 1
         val newCategory = getCatCategory(category)
         this.selectedCategory.value = newCategory
         this.scrollTabPosition.value = newCategory?.ordinal ?: 0
@@ -55,5 +86,12 @@ class CatViewModel @Inject constructor(
         this.category.value = category
     }
 
+    fun onChangedCatResultPosition(position: Int){
+        catListScrollPosition = position
+    }
+
+    private fun clearCatList(){
+        cat.value = listOf()
+    }
 }
 

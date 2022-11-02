@@ -12,6 +12,7 @@ interface CatServiceApi {
     @GET(CAT_SEARCH_PATH)
     suspend fun getListOfCats(
         @Header("x-api-key") authToken : String = AUTH_TOKEN,
+        @Query("page") page : Int = 1,
         @Query("mime_types") memeType : String = "gif",
         @Query("limit") limit : Int = 10,
         @Query("category_ids") category_Ids : Int = 2,

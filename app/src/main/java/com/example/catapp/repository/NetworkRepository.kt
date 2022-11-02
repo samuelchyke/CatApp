@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 interface NetworkRepository {
 
-    suspend fun getListOfCats(limit: Int,  category: Int) : Response<CatResponse>
+    suspend fun getListOfCats(page: Int,  category: Int) : Response<CatResponse>
 
 }
 
@@ -15,8 +15,8 @@ class NetworkRepositoryImpl @Inject constructor(
     private val catServiceApi: CatServiceApi
 ):NetworkRepository{
 
-    override suspend fun getListOfCats(limit: Int, category: Int): Response<CatResponse> {
-        return catServiceApi.getListOfCats(limit = limit, category_Ids = category)
+    override suspend fun getListOfCats(page: Int, category: Int): Response<CatResponse> {
+        return catServiceApi.getListOfCats(page = page, category_Ids = category)
     }
 
 }

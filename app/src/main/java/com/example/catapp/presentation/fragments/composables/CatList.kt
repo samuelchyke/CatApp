@@ -12,7 +12,10 @@ import com.example.catapp.model.CatItem
 @Composable
     fun CatList(
     loading: Boolean,
-    cats: List<CatItem>
+    cats: List<CatItem>,
+    page : Int,
+    onChangeScrollPosition: (Int) -> Unit,
+    onTriggerNextPage: () -> Unit,
     ) {
         Box(
             modifier = Modifier.background(color = MaterialTheme.colors.surface)
@@ -21,6 +24,10 @@ import com.example.catapp.model.CatItem
                 itemsIndexed(
                     items = cats
                 ) { index, cat ->
+                    onChangeScrollPosition(index)
+                    if ((index + 1) >= (page * 10) && !loading) {
+                        onTriggerNextPage()
+                    }
                     CatCard(
                         cat = cat,
                         onClick = {}

@@ -33,6 +33,7 @@ class CatFragment : Fragment() {
 
                 val result = catViewModel.cat.value
                 val loading = catViewModel.loading.value
+                val page = catViewModel.page.value
                 val selectedCategory = catViewModel.selectedCategory.value
                 val selectedChip = catViewModel.scrollTabPosition.value
 
@@ -53,7 +54,10 @@ class CatFragment : Fragment() {
                     ) {
                         CatList(
                             loading = loading,
-                            cats = result
+                            cats = result,
+                            page = page,
+                            onChangeScrollPosition = catViewModel::onChangedCatResultPosition,
+                            onTriggerNextPage = catViewModel::nextPage
                         )
                     }
                 }
