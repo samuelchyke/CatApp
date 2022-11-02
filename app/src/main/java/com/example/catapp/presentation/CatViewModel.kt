@@ -20,15 +20,19 @@ class CatViewModel @Inject constructor(
 
     val limit = mutableStateOf(10)
 
+    val loading = mutableStateOf(true)
+
     init {
         searchCats()
     }
 
     fun searchCats() = viewModelScope.launch {
+        loading.value = true
         val response = networkRepository.getListOfCats(limit.value)
         response.body()?.let {
             cat.value = it
         }
+        loading.value = false
     }
 
 }
