@@ -1,18 +1,17 @@
 package com.example.catapp.presentation.fragments.composables
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Surface
-import androidx.compose.material.TabRowDefaults
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.catapp.util.CatCategory
 import com.example.catapp.util.getAllCatCategories
+import com.example.catapp.R
+
 
 @Composable
 fun AppBar(
@@ -27,6 +26,18 @@ fun AppBar(
         color = MaterialTheme.colors.primary,
         elevation = 8.dp,
     ) {
+        Column(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            TopAppBar(
+                title = {
+                    Column {
+                        Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) { Text(stringResource(id = R.string.app_name)) }
+                    }
+                },
+                backgroundColor = MaterialTheme.colors.primary,
+                contentColor = Color.White,
+            )
         ScrollableTabRow(
             modifier = Modifier
                 .fillMaxWidth()
@@ -55,3 +66,5 @@ fun AppBar(
         }
     }
 }
+}
+
