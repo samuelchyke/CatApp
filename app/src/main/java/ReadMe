@@ -1,0 +1,27 @@
+// Cat App
+
+// Set Up Version Control
+// Create GitHub Repo
+// Add, Commit & Push to repo
+
+// Set up Dependencies and Project Structure
+// Import Dependencies
+// Add Packages
+
+// Set up api and app architecture
+// Model
+// Api
+// Dagger/Hilt
+// DI - RetroFit
+// Repository
+// DI - Repository
+// ViewModel
+
+// Set up UI
+// Fragment
+// Composable`s
+
+// Testing
+// Mock Api
+// Mock Repository
+// Test ViewModel
