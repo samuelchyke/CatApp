@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.catapp.presentation.CatViewModel
+import com.example.catapp.presentation.fragments.composables.AppBar
 import com.example.catapp.presentation.fragments.composables.CatList
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,17 +33,29 @@ class CatFragment : Fragment() {
 
                 val result = catViewModel.cat.value
                 val loading = catViewModel.loading.value
+                val selectedCategory = catViewModel.selectedCategory.value
+                val selectedChip = catViewModel.scrollTabPosition.value
 
-                Scaffold {
+                Scaffold(
+                    topBar = {
+                        AppBar(
+                            selectedCategory = selectedCategory,
+                            selectedChip = selectedChip,
+                            onExecuteSearch = catViewModel::searchCats,
+                            onSelectedCategoryChanged = catViewModel::onSelectedCategoryChanged
+                        )
+                    }
+                ) {
                     Box(
-                        modifier = Modifier.fillMaxSize().padding(it)
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(it)
                     ) {
                         CatList(
                             loading = loading,
                             cats = result
                         )
                     }
-
                 }
             }
         }
