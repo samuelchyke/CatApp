@@ -31,7 +31,7 @@ class NetworkRepositoryImplTest {
     fun `get cat response`() {
         runBlocking {
             Mockito.`when`(api.getListOfCats()).thenReturn(Response.success(CatResponse()))
-            val response = repository.getListOfCats(10,2)
+            val response = repository.getListOfCats(1,2)
             assertThat(CatResponse() == (response.body()))
         }
     }

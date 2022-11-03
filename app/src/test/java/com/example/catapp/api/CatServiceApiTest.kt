@@ -33,7 +33,7 @@ class CatServiceApiTest {
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build().create(CatServiceApi::class.java)
-        search = "/search?mime_types=gif&limit=10&category_ids=2"
+        search = "/search?page=1&mime_types=gif&limit=10&category_ids=2"
     }
 
     @Test

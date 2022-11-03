@@ -17,11 +17,20 @@
 // DI - Repository
 // ViewModel
 
-// Set up UI
+// Set up UI & Navigation
 // Fragment
-// Composable`s
+
+// Create Composable`s
+// App Bar
+// Card View
+// Lazy List
+// Chips
+// Progress Bar
 
 // Testing
 // Mock Api
 // Mock Repository
 // Test ViewModel
+
+// Extra
+// Pagination
